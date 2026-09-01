@@ -28,6 +28,7 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+          cache-dependency-path: java-github-actions-demo/pom.xml
 
       - name: Check Java Version
         run: java -version
@@ -36,12 +37,16 @@ jobs:
         run: mvn -version
 
       - name: Run Maven Tests
+        working-directory: ./java-github-actions-demo
         run: mvn clean test
 
       - name: Build Application
+        working-directory: ./java-github-actions-demo
         run: mvn clean package
 
       - name: Run Java Application
+        working-directory: ./java-github-actions-demo
         run: |
-          echo "Deployiing Appliacarion"
-          echo "Jar Appllicaion avaliabe"
+          echo "Deploying Application"
+          echo "JAR Application available"
+          ls -lh target/
